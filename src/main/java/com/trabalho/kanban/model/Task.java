@@ -25,7 +25,6 @@ public class Task {
 
     private LocalDate dueDate;
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -82,7 +81,7 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    // Enums
+
     public enum Status {
         TO_DO,
         IN_PROGRESS,

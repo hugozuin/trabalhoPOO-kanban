@@ -20,19 +20,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Desabilita CSRF
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login").permitAll() // Permite acesso ao endpoint de login
-                        .anyRequest().authenticated() // Exige autenticação para outros endpoints
+                        .requestMatchers("/auth/login").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .httpBasic().disable(); // Desabilita autenticação HTTP básica, pois estamos usando JWT
+                .httpBasic().disable();
 
         return http.build();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        // Configuração de usuário em memória para testes
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername("usuario_exemplo")
                 .password(passwordEncoder().encode("senha_exemplo"))
@@ -43,7 +42,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Criptografa senhas
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
